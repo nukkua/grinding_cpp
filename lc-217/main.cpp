@@ -1,5 +1,4 @@
 #include <iostream>
-#include <set>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
@@ -19,7 +18,7 @@ auto constains_duplicate(std::vector<int> &nums) noexcept -> bool {
 }
 
 auto contains_duplicate_one_line(std::vector<int> &nums) noexcept -> bool {
-  return nums.size() > std::set<int>(nums.begin(), nums.end()).size();
+  return nums.size() > std::unordered_set<int>(nums.begin(), nums.end()).size();
 }
 
 bool contains_duplicate_unordered_map(std::vector<int> &nums) {
