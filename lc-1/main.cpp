@@ -13,7 +13,7 @@ auto two_sum_brute_force(std::vector<int> &nums, int target)
       }
     }
   }
-  return {0, 0};
+  return {};
 }
 
 auto two_sum_hash_map(std::vector<int> &nums, int target) -> std::vector<int> {
