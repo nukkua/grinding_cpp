@@ -1,23 +1,21 @@
-#include <iostream>
 #include <vector>
 
 struct ListNode {
   int val;
   ListNode *next;
-
   ListNode() : val(0), next(nullptr){};
   ListNode(int x) : val(x), next(nullptr){};
+
   ListNode(int x, ListNode *nextPtr) : val(x), next(nextPtr){};
 };
-
 auto add_two_numbers(ListNode *l1, ListNode *l2) -> ListNode * {
+  ListNode *reusable = new ListNode();
+  ListNode *res = reusable;
+  int total = 0, curry = 0;
 
-  ListNode *dummy = new ListNode();
-  ListNode *res = dummy;
-  int total = 0, carry = 0;
+  while (l1 || l2 || curry) {
 
-  while (l1 || l2 || carry) {
-    total = carry;
+    total = curry;
 
     if (l1) {
       total += l1->val;
@@ -27,18 +25,16 @@ auto add_two_numbers(ListNode *l1, ListNode *l2) -> ListNode * {
       total += l2->val;
       l2 = l2->next;
     }
+
     int num = total % 10;
-    carry = total / 10;
-    dummy->next = new ListNode(num);
-    dummy = dummy->next;
-  }
-  res = res->next;
-  while (res != nullptr) {
-    std::cout << res->val << " ";
-    res = res->next;
+    curry = total / 10;
+
+    reusable->next = new ListNode(num);
+
+    reusable = reusable->next;
   }
 
-  return res;
+  return res->next;
 }
 
 auto main() -> int {
