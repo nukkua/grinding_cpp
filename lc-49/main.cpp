@@ -6,7 +6,7 @@
 auto group_anagram(std::vector<std::string> &strs)
     -> std::vector<std::vector<std::string>> {
   std::unordered_map<std::string, std::vector<std::string>> mp;
-  std::vector<std::vector<std::string>> sol = {{}};
+  std::vector<std::vector<std::string>> sol;
   for (std::string &x : strs) {
     std::string aux = x;
     std::sort(x.begin(), x.end());

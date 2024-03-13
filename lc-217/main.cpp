@@ -26,12 +26,11 @@ bool contains_duplicate_unordered_map(std::vector<int> &nums) {
   for (const auto &x : nums) {
     mp[x]++;
   }
-  bool flag = false;
   for (const auto &i : mp) {
     if (i.second >= 2)
       return true;
   }
-  return flag;
+  return false;
 }
 
 auto main() -> int {
