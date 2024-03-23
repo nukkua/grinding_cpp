@@ -11,7 +11,7 @@ auto is_palyndrome(std::string s) -> bool {
 
   for (int i = 0; i < n; ++i) {
     if (std::isalnum(s[i])) {
-      resol += tolower(s[i]);
+      resol += std::tolower(s[i]);
     }
   }
   for (int i = resol.size() - 1; i >= 0; --i) {
@@ -25,6 +25,6 @@ auto is_palyndrome(std::string s) -> bool {
 }
 
 auto main() -> int {
-  std::cout << is_palyndrome("0P");
+  std::cout << is_palyndrome("chesco");
   return 0;
 }
