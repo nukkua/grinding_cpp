@@ -1,11 +1,9 @@
-#include <iostream>
-#include <queue>
-#include <vector>
+#include <bits/stdc++.h>
 
 auto last_stone_weight(std::vector<int> &stones) -> int {
   int sol = 0;
   std::priority_queue<int> pq(stones.begin(), stones.end());
-
+  std::priority_queue<int, std::vector<int>, std::greater<int>> pq2;
   while (pq.size() > 1) {
     int max1 = pq.top();
     pq.pop();
@@ -19,7 +17,7 @@ auto last_stone_weight(std::vector<int> &stones) -> int {
 
 auto main() -> int {
 
-  std::vector<int> v = {2, 7, 4, 1, 8, 1};
+  std::vector<int> v = {2, 8, 3, 7, 9, 10};
   std::cout << last_stone_weight(v);
   return 0;
 }

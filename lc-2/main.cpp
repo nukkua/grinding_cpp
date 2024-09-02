@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 
 struct ListNode {
@@ -54,7 +55,13 @@ auto main() -> int {
     lk2.push_back(new ListNode(lk2_values[i], lk2[i - 1]));
   }
 
-  add_two_numbers(lk1[lk1.size() - 1], lk2[lk2_values.size() - 1]);
+  auto result =
+      add_two_numbers(lk1[lk1.size() - 1], lk2[lk2_values.size() - 1]);
+  ListNode *temp = result;
+  while (temp) {
+    std::cout << temp->val << '\n';
+    temp = temp->next;
+  }
 
   return 0;
 }

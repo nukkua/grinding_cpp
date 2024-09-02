@@ -18,9 +18,6 @@ auto longest_consecutive(std::vector<int> &nums) -> int {
   int sequence_change = 0;
   sequence.push_back(nums[1] - nums[0]);
 
-  for (int i = 1; i < n - 1; ++i) {
-  }
-
   return len;
 }
 

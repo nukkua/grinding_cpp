@@ -25,6 +25,6 @@ auto is_palyndrome(std::string s) -> bool {
 }
 
 auto main() -> int {
-  std::cout << is_palyndrome("chesco");
+  std::cout << is_palyndrome("123321");
   return 0;
 }

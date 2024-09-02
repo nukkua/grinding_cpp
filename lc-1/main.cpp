@@ -2,8 +2,8 @@
 #include <unordered_map>
 #include <vector>
 
-auto two_sum_brute_force(std::vector<int> &nums, int target)
-    -> std::vector<int> {
+auto two_sum_brute_force(std::vector<int> &nums,
+                         int target) -> std::vector<int> {
   int n = nums.size();
 
   for (int i = 0; i < n - 1; ++i) {
@@ -23,6 +23,8 @@ auto two_sum_hash_map(std::vector<int> &nums, int target) -> std::vector<int> {
   for (int i = 0; i < n; ++i) {
     int complement = target - nums[i];
 
+    std::cout << complement << "\n";
+
     if (mp.count(complement)) {
       return {mp[complement], i};
     }
@@ -33,11 +35,11 @@ auto two_sum_hash_map(std::vector<int> &nums, int target) -> std::vector<int> {
 }
 
 auto main() -> int {
-  std::vector<int> al = {10, 4, 23, 2, 6};
-  int target = 8;
+  std::vector<int> al = {2, 3, 7, 1, 5, 3};
+  int target = 5;
 
-  auto solution = two_sum_brute_force(al, target);
-  /* auto solution = two_sum_hash_map(al, target); */
+  /* auto solution = two_sum_brute_force(al, target); */
+  auto solution = two_sum_hash_map(al, target);
 
   for (const auto &x : solution) {
     std::cout << x << " ";
