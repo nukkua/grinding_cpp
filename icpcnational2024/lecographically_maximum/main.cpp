@@ -1,9 +1,15 @@
 #include <iostream>
 #include <vector>
 
+#pragma GCC optimize("03");
+
+#define fastio()                                                               \
+  std::ios_base::sync_with_stdio(0);                                           \
+  std::cin.tie(0);                                                             \
+  std::cout.tie(0);
+
 auto main() -> int {
-  std::ios::sync_with_stdio(false);
-  std::cin.tie(0);
+  fastio();
 
   int n;
   int orsito;
