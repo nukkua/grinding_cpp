@@ -16,7 +16,7 @@ auto main() -> int {
   std::cin >> n;
   std::vector<int> integers(n);
 
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; i++) [[likely]] {
     std::cin >> integers[i];
   }
 

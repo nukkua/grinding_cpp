@@ -1,4 +1,3 @@
-#include <ios>
 #include <iostream>
 #include <vector>
 
@@ -20,16 +19,16 @@ int main() {
 
   int t;
   std::cin >> t;
-  while (t--) {
+  while (t--) [[likely]] {
     int n;
     std::cin >> n;
     std::vector<int> a(n);
     ll sum = 0, P = 0;
-    for (auto &x : a) {
+    for (auto &x : a) [[likely]] {
       std::cin >> x;
       sum += x;
     }
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i) [[likely]] {
       sum -= a[i];
       P += a[i] * sum;
     }

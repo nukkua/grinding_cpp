@@ -1,15 +1,20 @@
 #include <iostream>
-int main() {
 
-  std::ios::sync_with_stdio(false);
-  std::cin.tie(0);
+#pragma GCC optimize("03")
+
+#define fastio()                                                               \
+  std::ios_base::sync_with_stdio(0);                                           \
+  std::cin.tie(0);                                                             \
   std::cout.tie(0);
+
+signed main() {
+  fastio();
 
   int n;
 
   std::cin >> n;
 
-  while (n--) {
+  while (n--) [[likely]] {
     int a, b;
     std::cin >> a >> b;
     if ((a & 1)) [[likely]] {

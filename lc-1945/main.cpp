@@ -1,7 +1,5 @@
-#include <chrono>
 #include <iostream>
 #include <string>
-#include <vector>
 
 #pragma GCC optimize("03")
 
@@ -11,6 +9,24 @@
   std::cout.tie(0);
 
 #define endl '\n'
+
+auto inline getLucky2(std::string s, int k) noexcept -> int {
+  std::string number = "";
+
+  for (const char &x : s) {
+    number += std::to_string(x - 'a' + 1);
+  }
+  while (k--) {
+    int temp = 0;
+    for (const char &x : number) {
+      temp += x - '0';
+    }
+
+    number = std::to_string(temp);
+  }
+
+  return std::stoi(number);
+}
 
 auto getDigit(int a) -> int {
   if (a / 10 == 0) {
@@ -28,8 +44,6 @@ auto getDigit(int a) -> int {
 
 auto getLucky(std::string s, int k) -> int {
   int result = 0;
-  std::vector<int> digits;
-  digits.reserve(s.size());
 
   for (const char &x : s) {
     result += getDigit(int(x - 'a') + 1);
@@ -48,10 +62,12 @@ signed main() {
 
   /* auto start = std::chrono::high_resolution_clock::now(); */
 
-  std::cout << getLucky("zbax", 2) << endl;
+  /* std::cout << getLucky("zbax", 2) << endl; */
   /* std::cout << getDigit(11) << endl; */
 
-  auto end = std::chrono::high_resolution_clock::now();
+  std::cout << getLucky2("aaaa", 1) << endl;
+
+  /* auto end = std::chrono::high_resolution_clock::now(); */
   /* std::chrono::duration<double> elapsed = end - start; */
 
   /* std::cout << elapsed.count() << endl; */
