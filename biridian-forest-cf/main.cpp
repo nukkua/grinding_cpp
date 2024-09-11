@@ -1,102 +1,85 @@
 #include <iostream>
-#include <limits>
 #include <queue>
-#include <string>
 #include <vector>
 
 #pragma GCC optimize("03")
 
-#define INF std::numeric_limits<int>::max()
 #define endl '\n'
+#define INF 0x3f3f3f3f
+
+#define pii std::pair<int, int>
+#define mp std::make_pair
 
 #define fastio()                                                               \
   std::ios_base::sync_with_stdio(0);                                           \
   std::cin.tie(0);                                                             \
   std::cout.tie(0);
 
-auto bfs(std::vector<std::vector<int>> &list,
-         int initialNode) -> std::vector<int> {
-  int n = list.size();
+struct Point {
+  int x;
+  int y;
+};
 
-  std::queue<int> q;
-  std::vector<int> d(n, INF);
-  q.push(initialNode);
-  d[initialNode] = 0;
-
-  while (!q.empty()) {
-    int x = q.front();
-    q.pop();
-
-    for (auto &y : list[x]) {
-      if (d[y] == INF) {
-        d[y] = d[x] + 1;
-        q.push(y);
-      }
-      if (x == y) {
-        return d;
-      }
-    }
-  }
-
-  return d;
-}
-
-signed main() {
+int main() {
   fastio();
   int r, c;
   std::cin >> r >> c;
-  char forest[r][c];
-  std::vector<std::vector<int>> list(r *
-                                     c); // Lista de adyacencia para r*c nodos
-  int initialNode = 0;
-  int finalNode = 0;
 
-  // Leer el bosque
-  for (int i = 0; i < r; i++) {
-    for (int j = 0; j < c; j++) {
+  std::vector<std::vector<char>> forest(r, std::vector<char>(c));
+  Point end_point;
+  Point start_point;
+
+  for (int i = 0; i < r; ++i) {
+    for (int j = 0; j < c; ++j) {
       std::cin >> forest[i][j];
-    }
-  }
-
-  // Generar el grafo
-  for (int i = 0; i < r; i++) {
-    for (int j = 0; j < c; j++) {
-      int node = i * c + j; // Índice del nodo en la lista de adyacencia
-
-      if (forest[i][j] != 'T') {
-        // Conectar con el nodo a la izquierda
-        if (j - 1 >= 0 && forest[i][j - 1] != 'T') {
-          list[node].push_back(i * c + (j - 1));
-        }
-
-        // Conectar con el nodo a la derecha
-        if (j + 1 < c && forest[i][j + 1] != 'T') {
-          list[node].push_back(i * c + (j + 1));
-        }
-
-        // Conectar con el nodo de arriba
-        if (i - 1 >= 0 && forest[i - 1][j] != 'T') {
-          list[node].push_back((i - 1) * c + j);
-        }
-
-        // Conectar con el nodo de abajo
-        if (i + 1 < r && forest[i + 1][j] != 'T') {
-          list[node].push_back((i + 1) * c + j);
-        }
-      }
-      if (forest[i][j] == 'S') {
-        initialNode = node;
-      }
       if (forest[i][j] == 'E') {
-        finalNode = node;
+        end_point = Point{i, j}; // End point
+      } else if (forest[i][j] == 'S') {
+        start_point = Point{i, j}; // Start point
       }
     }
   }
 
-  auto d = bfs(list, initialNode);
+  std::vector<std::vector<int>> d(r, std::vector<int>(c, INF));
 
-  std::cout << "From " << initialNode << " to " << finalNode << " is -> "
-            << d[finalNode] << endl;
+  int dx[] = {-1, +1, 0, 0};
+  int dy[] = {0, 0, +1, -1};
+
+  std::queue<Point> q;
+
+  q.push(end_point);
+  d[end_point.x][end_point.y] = 0;
+
+  while (!q.empty()) {
+    Point curr = q.front();
+    q.pop();
+
+    for (int i = 0; i < 4; ++i) {
+      int nx = curr.x + dx[i];
+      int ny = curr.y + dy[i];
+
+      if (nx < 0 || ny < 0 || nx >= r || ny >= c || forest[nx][ny] == 'T' ||
+          d[nx][ny] != INF)
+        continue;
+
+      d[nx][ny] = d[curr.x][curr.y] + 1;
+      q.push(Point{nx, ny});
+    }
+  }
+
+  int num_enemies = 0;
+
+  int dist_start = d[start_point.x][start_point.y];
+
+  for (int i = 0; i < r; ++i) {
+    for (int j = 0; j < c; ++j) {
+      if (d[i][j] <= dist_start && forest[i][j] >= '0' && forest[i][j] <= '9') {
+        num_enemies += (forest[i][j] - '0');
+      }
+    }
+  }
+
+  std::cout << num_enemies << endl;
 
   return 0;
 }
