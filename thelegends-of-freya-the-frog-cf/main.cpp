@@ -18,8 +18,8 @@ signed main() {
   while (t--) {
     int x, y, k;
     std::cin >> x >> y >> k;
-    int nx = (x + k - 1) / k;
-    int ny = (y + k - 1) / k;
+    int nx = (x + k - 1) / k; // ceiling
+    int ny = (y + k - 1) / k; // ceiling
     int ans = std::max(2 * nx - 1, 2 * ny);
     std::cout << ans << endl;
   }
