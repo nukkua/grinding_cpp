@@ -6,7 +6,7 @@
 
 #define endl '\n'
 
-#define INF 0x3f3f3f3f
+#define INF 0x7fffffff
 
 #define fastio()                                                               \
   std::ios_base::sync_with_stdio(0);                                           \
