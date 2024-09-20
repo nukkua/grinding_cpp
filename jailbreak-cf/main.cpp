@@ -22,5 +22,7 @@ const int dy[] = {0, 0, +1, -1};
 
 signed main() {
   int t;
+
+  // esta vacio por que me enoje y lo borre
   return 0;
 }
